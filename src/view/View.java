@@ -30,7 +30,7 @@ public class View extends Application {
 	}
 	
 	// Initialize GridPane Wrapper Method
-	public void initGridPane() {
+	private void initGridPane() {
 		
 		System.out.println("Initializing GridPane Wrapper Node");
 		setGridPane(new GridPane());
@@ -46,7 +46,7 @@ public class View extends Application {
 	}
 	
 	// Initialize StackPane Wrapper Method
-	public void initStackPane() {
+	private void initStackPane() {
 		
 	}
 
