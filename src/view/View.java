@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -8,6 +9,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class View extends Application {
+	
+	// Final Fields
+	private final double GRID_PANE_PADDING = 50.0;
+	private final double GRID_PANE_VGAP = 15.0;
+	private final double GRID_PANE_HGAP = 30.0;
 	
 	// Layout Wrapper Nodes
 	private GridPane grid;
@@ -21,7 +27,7 @@ public class View extends Application {
 	// StackPane Getter Method
 	public StackPane getStackPane() {
 		return this.stack;
-	}
+	} 
 	
 	// GridPane Setter Method
 	public void setGridPane(GridPane grid) {
@@ -35,23 +41,27 @@ public class View extends Application {
 		this.stack = stack;
 	}
 	
-	// Initialize Layout Node Method
-	public void initLayoutWrappers() {
-		System.out.println("Initializing Layout Wrapper Nodes");
-		this.grid = new GridPane();
-		this.stack = new StackPane();
-	}
-	
 	// Initialize GridPane Wrapper Method
 	public void initGridPane() {
-		System.out.println("Initializing GridPane Wrapper Node");
 		
+		System.out.println("Initializing GridPane Wrapper Node");
+		setGridPane(new GridPane());
+		
+		// Configure Padding (amount of space between the edges of the GridPane and its child nodes)
+		getGridPane().setPadding(new Insets(GRID_PANE_PADDING));
+		
+		// Configure Horizontal Gap (amount of horizontal space to be added between each column)
+		getGridPane().setHgap(GRID_PANE_HGAP);
+		
+		// Configure Vertical Gap (amount of vertical space to be added between each row)
+		getGridPane().setVgap(GRID_PANE_VGAP);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		
+		// Instantiate GridPane Layout Wrapper
+		this.initGridPane();
 		
 		
         // Create a Button and set an action on it
