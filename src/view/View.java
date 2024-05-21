@@ -17,28 +17,16 @@ public class View extends Application {
 	
 	// Layout Wrapper Nodes
 	private GridPane grid;
-	private StackPane stack;
 	
 	// GridPane Getter Method
 	public GridPane getGridPane() {
 		return this.grid;
 	}
 	
-	// StackPane Getter Method
-	public StackPane getStackPane() {
-		return this.stack;
-	} 
-	
 	// GridPane Setter Method
 	public void setGridPane(GridPane grid) {
 		if(grid == null) throw new NullPointerException("GridPane cannot be null");
 		this.grid = grid;
-	}
-	
-	// StackPane Setter Method
-	public void setStackPane(StackPane stack) {
-		if(stack == null) throw new NullPointerException("StackPane cannot be null");
-		this.stack = stack;
 	}
 	
 	// Initialize GridPane Wrapper Method
@@ -55,6 +43,11 @@ public class View extends Application {
 		
 		// Configure Vertical Gap (amount of vertical space to be added between each row)
 		getGridPane().setVgap(GRID_PANE_VGAP);
+	}
+	
+	// Initialize StackPane Wrapper Method
+	public void initStackPane() {
+		
 	}
 
 	@Override
