@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
-import javafx.scene.shape.Circle;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background; 
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
 
 public class View extends Application {
 	
-	// Final Fields
+	// Static & Final Fields
 	private final double GRID_PANE_PADDING = 50.0;
 	private final double GRID_PANE_VGAP = 0.5;
 	private final double GRID_PANE_HGAP = 0.5;
@@ -94,12 +93,13 @@ public class View extends Application {
 				// Debugging Print Statement
 				System.out.println("Added ViewStackPane at row " + row + " and column " + column);
 				
-				Circle circle = new Circle(100, 100, 70);
-				
-				circle.setFill(Color.DARKBLUE);
+				// Instantiate CircleNode
+				CircleNode circle = new CircleNode(row, column, null);
 				
 				// Instantiate ViewStackPane Wrapper 
 				ViewStackPane stack = new ViewStackPane(circle, row, column);
+				
+				circle.setStackpaneParent(stack);
 				
 				// Decorate ViewStackPane Wrapper
 				initViewStackPane(stack);
