@@ -148,10 +148,10 @@ public class View extends Application {
 		// Initialize GridPane Layout Wrapper
 		initGridPane();
 		
+		System.out.println("List Size: " + this.getStackPaneList().size());
+		
 		// Initialize BorderPane Layout Wrapper
 		initBorderPane();
-		
-		System.out.println("List Size: " + this.getStackPaneList().size());
 	
         // Create a scene with the layout
         Scene scene = new Scene(getBorderPane(), 1120, 1000);
