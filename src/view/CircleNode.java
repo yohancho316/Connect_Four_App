@@ -6,9 +6,9 @@ import javafx.scene.shape.Circle;
 public class CircleNode extends Circle{
 	
 	// Static & Final Fields
-	private static final float CENTER_X = 100.0f;
-	private static final float CENTER_Y = 100.0f;
-	private static final float RADIUS = 70.0f;
+	private static final float CENTER_X = 90.0f;
+	private static final float CENTER_Y = 90.0f;
+	private static final float RADIUS = 55.0f;
 	private static final Color START_CIRCLE_COLOR = Color.DARKBLUE;
 	
 	// Primitive Fields

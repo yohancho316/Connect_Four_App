@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 public class View extends Application {
 	
 	// Static & Final Fields
+	private final double SCENE_HEIGHT = 900;
+	private final double SCENE_WIDTH = 900;
 	private final double GRID_PANE_PADDING = 50.0;
 	private final double GRID_PANE_VGAP = 0.5;
 	private final double GRID_PANE_HGAP = 0.5;
@@ -154,7 +156,7 @@ public class View extends Application {
 		initBorderPane();
 	
         // Create a scene with the layout
-        Scene scene = new Scene(getBorderPane(), 1120, 1000);
+        Scene scene = new Scene(getBorderPane(), SCENE_WIDTH, SCENE_HEIGHT);
 
         // Set the title of the stage
         primaryStage.setTitle("Connect-4 Application");
