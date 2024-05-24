@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class CircleNode extends Circle{
@@ -8,6 +9,7 @@ public class CircleNode extends Circle{
 	private static final float CENTER_X = 100.0f;
 	private static final float CENTER_Y = 100.0f;
 	private static final float RADIUS = 70.0f;
+	private static final Color START_CIRCLE_COLOR = Color.DARKBLUE;
 	
 	// Primitive Fields
 	private int row;
@@ -51,7 +53,7 @@ public class CircleNode extends Circle{
 	
     // Overloaded Circle constructor Method
 	public CircleNode(int row, int column) {
-		super(CENTER_X, CENTER_Y, RADIUS);
+		super(CENTER_X, CENTER_Y, RADIUS, START_CIRCLE_COLOR);
 		this.row = row;
 		this.column = column;
 	}

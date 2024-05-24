@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class View extends Application {
 	
-	// Final Fields
+	// Static & Final Fields
 	private final double GRID_PANE_PADDING = 50.0;
 	private final double GRID_PANE_VGAP = 0.5;
 	private final double GRID_PANE_HGAP = 0.5;
