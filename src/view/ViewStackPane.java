@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.shape.Circle;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -13,6 +12,7 @@ public class ViewStackPane extends StackPane {
     // Primitive Fields
     private int row;
     private int column;
+    private CircleNode circle;
 
     // Row Getter Method
     public int getRow() {
@@ -22,6 +22,11 @@ public class ViewStackPane extends StackPane {
     // Column Getter Method
     public int getColumn() {
         return this.column;
+    }
+    
+    // CircleNode Getter Method
+    public CircleNode getCircleNode() {
+    	return this.circle;
     }
 
     // Row Setter Method
@@ -35,9 +40,15 @@ public class ViewStackPane extends StackPane {
         if (column < 0 || column > 6) throw new IllegalArgumentException("Column # is out of bounds");
         this.column = column;
     }
+    
+    // CircleNode Setter Method
+    public void setCircleNode(CircleNode circle) {
+    	if(circle == null) throw new NullPointerException("Circle cannot be null");
+    	this.circle = circle;
+    }
 
     // ViewStackPane Constructor
-    public ViewStackPane(Circle circle, int row, int column) {
+    public ViewStackPane(CircleNode circle, int row, int column) {
     	super(circle);
         // Set Row
         setRow(row);

@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 
 public class CircleNode extends Circle{
 	
-	// Final Fields
+	// Static & Final Fields
 	private static final float CENTER_X = 100.0f;
 	private static final float CENTER_Y = 100.0f;
 	private static final float RADIUS = 70.0f;
@@ -14,6 +14,7 @@ public class CircleNode extends Circle{
 	// Primitive Fields
 	private int row;
 	private int column;
+	private Color background;
 	
 	// Parent Field
 	private ViewStackPane parent;
@@ -33,6 +34,11 @@ public class CircleNode extends Circle{
 		return this.parent;
 	}
 	
+	// Color Background Getter Method
+	public Color getBackground() {
+		return this.background;
+	}
+	
 	// ViewStackPane Parent Setter
 	public void setStackpaneParent(ViewStackPane parent) {
 		if(parent == null || parent.getChildren().isEmpty()) throw new NullPointerException("ViewStackPane Parent cannot be null");
@@ -50,12 +56,21 @@ public class CircleNode extends Circle{
         if (column < 0 || column > 6) throw new IllegalArgumentException("Column # is out of bounds");
         this.column = column;
     }
+    
+    // Color Background Setter Method
+    public void setBackground(Color background) {
+    	if(background == null) throw new NullPointerException("Background cannot be null");
+    	this.background = background;
+    }
+    
 	
     // Overloaded Circle constructor Method
-	public CircleNode(int row, int column) {
+	public CircleNode(int row, int column, ViewStackPane parent) {
 		super(CENTER_X, CENTER_Y, RADIUS, START_CIRCLE_COLOR);
 		this.row = row;
 		this.column = column;
+		this.parent = parent;
+		this.background = START_CIRCLE_COLOR;
 	}
 
 }
