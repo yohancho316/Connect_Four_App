@@ -14,6 +14,8 @@ public class CircleNode extends Circle{
 	// Primitive Fields
 	private int row;
 	private int column;
+	
+	// Color Instance
 	private Color background;
 	
 	// Parent Field
@@ -63,7 +65,6 @@ public class CircleNode extends Circle{
     	this.background = background;
     }
     
-	
     // Overloaded Circle constructor Method
 	public CircleNode(int row, int column, ViewStackPane parent) {
 		super(CENTER_X, CENTER_Y, RADIUS, START_CIRCLE_COLOR);

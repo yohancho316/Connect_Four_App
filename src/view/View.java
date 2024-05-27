@@ -1,5 +1,7 @@
 package view;
 
+import controller.Controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class View extends Application {
@@ -33,6 +36,9 @@ public class View extends Application {
 	// GridPane Collection
 	private List<ViewStackPane> stackPaneList;
 	
+	// CircleNode Collection
+	private List<CircleNode> circleNodeList;
+	
 	// GridPane Getter Method
 	public GridPane getGridPane() {
 		return this.grid;
@@ -46,6 +52,11 @@ public class View extends Application {
 	// StackPane Collection Getter Method
 	public List<ViewStackPane> getStackPaneList() {
 		return this.stackPaneList;
+	}
+	
+	// CircleNode Collection Getter Method
+	public List<CircleNode> getCircleNodeList() {
+		return this.circleNodeList;
 	}
 	
 	// GridPane Setter Method
@@ -66,6 +77,12 @@ public class View extends Application {
 		this.stackPaneList = stackPaneList;
 	}
 	
+	// CircleNode Collection Setter Method
+	public void setCircleNodeList(List<CircleNode> circleNodeList) {
+		if(circleNodeList == null) throw new NullPointerException("CircleNodeList cannot be null");
+		this.circleNodeList = circleNodeList;
+	}
+	
 	// Initialize GridPane Wrapper Method
 	private void initGridPane() {
 		
@@ -84,6 +101,9 @@ public class View extends Application {
 		// Initialize StackPane Collection
 		setStackPaneList(new ArrayList<ViewStackPane>());
 		
+		// Initialize CircleNode Collection
+		setCircleNodeList(new ArrayList<CircleNode>());
+		
 		int row = 0;
 		int column = 0;
 		
@@ -98,6 +118,8 @@ public class View extends Application {
 				// Instantiate CircleNode
 				CircleNode circle = new CircleNode(row, column, null);
 				
+				circle.addEventHandler(MouseEvent.MOUSE_CLICKED, Controller.circleMouseEventHandler);
+				
 				// Instantiate ViewStackPane Wrapper 
 				ViewStackPane stack = new ViewStackPane(circle, row, column);
 				
@@ -111,6 +133,9 @@ public class View extends Application {
 				
 				// Add StackPane Wrapper in StackPane Collection
 				getStackPaneList().add(stack);
+				
+				// Add CircleNode in CircleNode Collection
+				getCircleNodeList().add(circle);
 				
 			}
 			
@@ -139,6 +164,7 @@ public class View extends Application {
 		System.out.println("Initiating BorderPane Wrapper");
 		
 		if(getGridPane() == null) throw new NullPointerException("GridPane cannot be null");
+		
 		setBorderPane(new BorderPane());
 		getBorderPane().setCenter(getGridPane());
 		BorderPane.setAlignment(getGridPane(), GRID_PANE_POSITION);
@@ -150,18 +176,23 @@ public class View extends Application {
 		// Initialize GridPane Layout Wrapper
 		initGridPane();
 		
+		// Print List Size for All Collections
 		System.out.println("List Size: " + this.getStackPaneList().size());
+		System.out.println("CircleNode List Size: " + this.getCircleNodeList().size());
 		
 		// Initialize BorderPane Layout Wrapper
 		initBorderPane();
 	
         // Create a scene with the layout
         Scene scene = new Scene(getBorderPane(), SCENE_WIDTH, SCENE_HEIGHT);
+       
 
         // Set the title of the stage
-        primaryStage.setTitle("Connect-4 Application");
+        primaryStage.setTitle("Connect-4 Application"); 
+        
         // Add the scene to the stage
         primaryStage.setScene(scene);
+        
         // Show the stage
         primaryStage.show();
 		

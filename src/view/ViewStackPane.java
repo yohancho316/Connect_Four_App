@@ -12,6 +12,8 @@ public class ViewStackPane extends StackPane {
     // Primitive Fields
     private int row;
     private int column;
+    
+    // CircleNode Instance
     private CircleNode circle;
 
     // Row Getter Method
@@ -49,11 +51,16 @@ public class ViewStackPane extends StackPane {
 
     // ViewStackPane Constructor
     public ViewStackPane(CircleNode circle, int row, int column) {
+    	
+    	// Invoke Circle Super Constructor Method
     	super(circle);
+    	
         // Set Row
         setRow(row);
+        
         // Set Column
         setColumn(column);
+        
         // Initialize Background
         initBackground();
     }
