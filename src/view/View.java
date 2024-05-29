@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import model.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class View extends Application {
 	}
 	
 	// Initialize GridPane Wrapper Method
-	private void initGridPane() {
+	private void initGridPane(Model model) {
 		
 		System.out.println("Initializing GridPane Wrapper Node");
 		setGridPane(new GridPane());
@@ -118,7 +119,11 @@ public class View extends Application {
 				// Instantiate CircleNode
 				CircleNode circle = new CircleNode(row, column, null);
 				
-				circle.addEventHandler(MouseEvent.MOUSE_CLICKED, Controller.circleMouseEventHandler);
+				// TEMP TEST NODE
+				Controller tempController = new Controller(model);
+				
+				// Attach Event Handlers to Circle Node Instances
+				circle.addEventHandler(MouseEvent.MOUSE_CLICKED, tempController.circleMouseEventHandler);
 				
 				// Instantiate ViewStackPane Wrapper 
 				ViewStackPane stack = new ViewStackPane(circle, row, column);
@@ -174,10 +179,10 @@ public class View extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		// Instantiate Model Node
-		
+		Model model = new Model();
 		
 		// Initialize GridPane Layout Wrapper
-		initGridPane();
+		initGridPane(model);
 		
 		// Print List Size for All Collections
 		System.out.println("List Size: " + this.getStackPaneList().size());
@@ -188,7 +193,6 @@ public class View extends Application {
 	
         // Create a scene with the layout
         Scene scene = new Scene(getBorderPane(), SCENE_WIDTH, SCENE_HEIGHT);
-       
 
         // Set the title of the stage
         primaryStage.setTitle("Connect-4 Application"); 

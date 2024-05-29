@@ -62,8 +62,9 @@ public class CircleNode extends Circle{
     // Color Background Setter Method
     public void setBackground(Color background) {
     	if(background == null) throw new NullPointerException("Background cannot be null");
-    	this.background = background;
-    	this.setFill(background);
+    	System.out.println(background.toString());
+    	this.background = (Color) background;
+    	this.setFill(this.background);
     }
     
     // Overloaded Circle constructor Method

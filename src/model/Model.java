@@ -22,8 +22,13 @@ public class Model {
 	}
 	
 	// Red Turn Setter Method
-	public void setPlayerTurn(boolean redTurn) {
+	public void setRedTurn(boolean redTurn) {
 		this.redTurn = redTurn;
+	}
+	
+	// Change Player Turn Method
+	public void changePlayerTurn() {
+		this.redTurn = !this.redTurn;
 	}
 	
 	// Constructor Method
