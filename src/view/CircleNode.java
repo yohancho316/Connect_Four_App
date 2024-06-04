@@ -6,14 +6,16 @@ import javafx.scene.shape.Circle;
 public class CircleNode extends Circle{
 	
 	// Static & Final Fields
-	private static final float CENTER_X = 100.0f;
-	private static final float CENTER_Y = 100.0f;
-	private static final float RADIUS = 70.0f;
+	private static final float CENTER_X = 90.0f;
+	private static final float CENTER_Y = 90.0f;
+	private static final float RADIUS = 55.0f;
 	private static final Color START_CIRCLE_COLOR = Color.DARKBLUE;
 	
 	// Primitive Fields
 	private int row;
 	private int column;
+	
+	// Color Instance
 	private Color background;
 	
 	// Parent Field
@@ -60,10 +62,11 @@ public class CircleNode extends Circle{
     // Color Background Setter Method
     public void setBackground(Color background) {
     	if(background == null) throw new NullPointerException("Background cannot be null");
-    	this.background = background;
+    	System.out.println(background.toString());
+    	this.background = (Color) background;
+    	this.setFill(this.background);
     }
     
-	
     // Overloaded Circle constructor Method
 	public CircleNode(int row, int column, ViewStackPane parent) {
 		super(CENTER_X, CENTER_Y, RADIUS, START_CIRCLE_COLOR);

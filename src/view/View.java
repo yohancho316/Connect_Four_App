@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background; 
@@ -11,22 +10,24 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class View extends Application {
+public class View {
 	
 	// Static & Final Fields
 	private final double GRID_PANE_PADDING = 50.0;
 	private final double GRID_PANE_VGAP = 0.5;
 	private final double GRID_PANE_HGAP = 0.5;
 	private final Pos GRID_PANE_POSITION = javafx.geometry.Pos.CENTER;
+	private final BackgroundFill dodger_blue_background_fill = new BackgroundFill(Color.DODGERBLUE, CornerRadii.EMPTY, Insets.EMPTY);;
+	private final Background dodger_blue_background = new Background(dodger_blue_background_fill);
 	
 	// Layout Wrapper Nodes
 	private GridPane grid;
 	private BorderPane border;
+	
+	// CircleNode Collection
+	private List<CircleNode> circleNodeList;
 	
 	// GridPane Collection
 	private List<ViewStackPane> stackPaneList;
@@ -44,6 +45,11 @@ public class View extends Application {
 	// StackPane Collection Getter Method
 	public List<ViewStackPane> getStackPaneList() {
 		return this.stackPaneList;
+	}
+	
+	// CircleNode Collection Getter Method
+	public List<CircleNode> getCircleNodeList() {
+		return this.circleNodeList;
 	}
 	
 	// GridPane Setter Method
@@ -64,11 +70,33 @@ public class View extends Application {
 		this.stackPaneList = stackPaneList;
 	}
 	
-	// Initialize GridPane Wrapper Method
-	private void initGridPane() {
+	// CircleNode Collection Setter Method
+	public void setCircleNodeList(List<CircleNode> circleNodeList) {
+		if(circleNodeList == null) throw new NullPointerException("CircleNodeList cannot be null");
+		this.circleNodeList = circleNodeList;
+	}
+	
+	// View Constructor Method
+	public View() {
 		
-		System.out.println("Initializing GridPane Wrapper Node");
-		setGridPane(new GridPane());
+		// Initialize GridPane Wrapper
+		this.initGridPaneWrapper();
+		
+		// Initialize Node Collections
+		this.initNodeCollections();
+		
+		// Populate GridPane Wrapper
+		this.populateGridPaneWrapper();
+		
+		// Initialize BorderPane Wrapper
+		this.initBorderPane();	
+	}
+	
+	// Initialize GridPane Wrapper Method
+	private void initGridPaneWrapper() {
+		
+		// Instantiate GridPane Wrapper
+		this.grid = new GridPane();
 		
 		// Configure Padding (amount of space between the edges of the GridPane and its child nodes)
 		getGridPane().setPadding(new Insets(GRID_PANE_PADDING));
@@ -78,9 +106,20 @@ public class View extends Application {
 		
 		// Configure Vertical Gap (amount of vertical space to be added between each row)
 		getGridPane().setVgap(GRID_PANE_VGAP);
+	}
+	
+	// Initialize JavaFX Node Collections
+	private void initNodeCollections() {
 		
 		// Initialize StackPane Collection
 		setStackPaneList(new ArrayList<ViewStackPane>());
+		
+		// Initialize CircleNode Collection
+		setCircleNodeList(new ArrayList<CircleNode>());
+	}
+	
+	// Populate GridPane Wrapper
+	private void populateGridPaneWrapper() {
 		
 		int row = 0;
 		int column = 0;
@@ -96,13 +135,17 @@ public class View extends Application {
 				// Instantiate CircleNode
 				CircleNode circle = new CircleNode(row, column, null);
 				
+				// Add CircleNode to CircleNode Collection
+				getCircleNodeList().add(circle);
+				
 				// Instantiate ViewStackPane Wrapper 
 				ViewStackPane stack = new ViewStackPane(circle, row, column);
 				
-				circle.setStackpaneParent(stack);
+				// Configure Background for each StackPane Wrapper
+				stack.setBackground(dodger_blue_background);
 				
-				// Decorate ViewStackPane Wrapper
-				initViewStackPane(stack);
+				// Sets the Parent of the CircleNode to be the StackPane Wrapper
+				circle.setStackpaneParent(stack);
 				
 				// Add StackPane Wrapper in Each Cell within GridPane Wrapper
 				getGridPane().add(stack, column, row);
@@ -115,58 +158,22 @@ public class View extends Application {
 			column = 0;
 			
 		}
-		
-	}
-	
-	// Initialize ViewStackPane Wrapper
-	private void initViewStackPane(StackPane stack) {
-		
-		// Instantiate Background Fill Node
-		BackgroundFill dodger_blue_background_fill = new BackgroundFill(Color.DODGERBLUE, CornerRadii.EMPTY, Insets.EMPTY);;
-		
-		// Instantiate Background Node
-		Background dodger_blue_background = new Background(dodger_blue_background_fill);
-		
-		// Configure Background for each StackPane Wrapper
-		stack.setBackground(dodger_blue_background);
 	}
 	
 	// Initialize BorderPane Wrapper
 	public void initBorderPane() {
 		
-		System.out.println("Initiating BorderPane Wrapper");
-		
+		// Check if GridPane Wrapper is Null
 		if(getGridPane() == null) throw new NullPointerException("GridPane cannot be null");
+		
+		// Instantiate BorderPane Wrapper 
 		setBorderPane(new BorderPane());
+		
+		// Set GridPane to Center Position in BorderPane Wrapper
 		getBorderPane().setCenter(getGridPane());
+		
+		// Configure the Starting Location of GridPane Wrapper within BorderPane Wrapper
 		BorderPane.setAlignment(getGridPane(), GRID_PANE_POSITION);
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		// Initialize GridPane Layout Wrapper
-		initGridPane();
-		
-		System.out.println("List Size: " + this.getStackPaneList().size());
-		
-		// Initialize BorderPane Layout Wrapper
-		initBorderPane();
-	
-        // Create a scene with the layout
-        Scene scene = new Scene(getBorderPane(), 1120, 1000);
-
-        // Set the title of the stage
-        primaryStage.setTitle("Connect-4 Application");
-        // Add the scene to the stage
-        primaryStage.setScene(scene);
-        // Show the stage
-        primaryStage.show();
-		
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 
 }
