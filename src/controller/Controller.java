@@ -30,7 +30,6 @@ public class Controller {
 	// View Setter Method
 	public void setView(View view) {
 		if(view == null) throw new NullPointerException("View cannot be null");
-		this.view = view;
 	}
 	
 	// Model Setter Method
