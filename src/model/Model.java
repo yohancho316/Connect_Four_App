@@ -51,7 +51,7 @@ public class Model {
 	    if(column < 0 || column >= COLUMNS) throw new IllegalArgumentException("Column argument is out of bounds");
 	    
 	    // Check if Space Exists
-	    if(checkColumnSpace(column)) throw new IllegalArgumentException("Cannot place coin. Column is currently full");
+	    if(checkColumnSpace(column) == false) return false;
 	    
 	    // Get Next Open Column Position
 	    int openPos = this.board[column][6];
@@ -89,10 +89,8 @@ public class Model {
 	
 	// Check Column Space Method
 	private boolean checkColumnSpace(int column) {
-		
-		if(this.board[column][ROWS - 1] >= 6) return true;
-		
-		return false;
+		if(this.board[column][ROWS - 1] >= 6) return false;
+		return true;
 	}
 	
 	// Constructor Method
