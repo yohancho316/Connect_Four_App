@@ -1,11 +1,11 @@
 package main;
 
+import controller.Controller;
 import model.Model;
 import view.View;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -24,6 +24,9 @@ public class Main extends Application {
 			
 			// Instantiate View Node
 			View view = new View();
+			
+			// Instantiate Controller Node
+			//Controller controller = new Controller(model, view);
 			
 			// Drop Chips into Connect-4 Board
 			model.dropCoin(1);
