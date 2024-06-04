@@ -1,7 +1,5 @@
 package model;
 
-import view.CircleNode;
-
 public class Model {
 	
 	// Model Class Properties 
@@ -99,7 +97,6 @@ public class Model {
 		this.gamePlay = true;
 		this.redTurn = true;
 		this.board = new int[COLUMNS][ROWS];
-		//printBoard();
 	}
 
 }
