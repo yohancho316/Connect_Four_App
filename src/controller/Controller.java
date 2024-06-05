@@ -72,7 +72,7 @@ public class Controller {
 	}
 	
 	// Attach EventHandlers to CircleNode Instances
-	public void attachEventHandlers() {
+	private void attachEventHandlers() {
 		for(CircleNode circle : this.circleNodeList) {
 			circle.addEventHandler(MouseEvent.MOUSE_CLICKED, circleMouseClickEventHandler);
 		}
@@ -89,7 +89,7 @@ public class Controller {
 	}
 	
 	// Mouse Click Event Handler
-	public EventHandler<MouseEvent> circleMouseClickEventHandler = new EventHandler<MouseEvent>() {
+	private EventHandler<MouseEvent> circleMouseClickEventHandler = new EventHandler<MouseEvent>() {
 		
 		@Override
 		public void handle(MouseEvent event) {
