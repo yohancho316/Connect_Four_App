@@ -11,6 +11,14 @@ public class Model {
 	// Matrix Collection
 	private final int[][] board;
 	
+	// Constructor Method
+	public Model() {
+		System.out.println("Instantiating Model Object");
+		this.gamePlay = true;
+		this.redTurn = true;
+		this.board = new int[COLUMNS][ROWS];
+	}
+	
 	// Game Play Getter Method
 	public boolean getGamePlay() {
 		return this.gamePlay;
@@ -35,7 +43,6 @@ public class Model {
 	public void setRedTurn(boolean redTurn) {
 		this.redTurn = redTurn;
 	}
-	
 	
 	// Change Player Turn Method
 	public void changePlayerTurn() {
@@ -73,7 +80,6 @@ public class Model {
         
         return true;
 	}
-
 	
 	// Print Board
 	public void printBoard() {
@@ -86,17 +92,9 @@ public class Model {
 	}
 	
 	// Check Column Space Method
-	private boolean checkColumnSpace(int column) {
+	public boolean checkColumnSpace(int column) {
 		if(this.board[column][ROWS - 1] >= 6) return false;
 		return true;
-	}
-	
-	// Constructor Method
-	public Model() {
-		System.out.println("Instantiating Model Object");
-		this.gamePlay = true;
-		this.redTurn = true;
-		this.board = new int[COLUMNS][ROWS];
 	}
 
 }
