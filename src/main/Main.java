@@ -26,18 +26,7 @@ public class Main extends Application {
 			View view = new View();
 			
 			// Instantiate Controller Node
-			//Controller controller = new Controller(model, view);
-			
-			// Drop Chips into Connect-4 Board
-			model.dropCoin(1);
-			model.dropCoin(1);
-			model.dropCoin(1);
-			model.dropCoin(1);
-			model.dropCoin(1);
-			model.dropCoin(1);
-
-			// Print All Chips in Play
-			model.printBoard();
+			Controller controller = new Controller(model, view);
 			
 			// Instantiate Scene Container
 	        Scene scene = new Scene(view.getBorderPane(), SCENE_WIDTH, SCENE_HEIGHT);
@@ -52,6 +41,8 @@ public class Main extends Application {
 	        primaryStage.show();
         
 		} catch (Exception e) {
+			
+			// Print Stack Trace
 			e.printStackTrace();
 		}
 
