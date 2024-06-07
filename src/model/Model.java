@@ -63,9 +63,7 @@ public class Model {
 	    
 		System.out.println("Open Position: " + openPos);
 		
-	    
 	    // Place Chip in Open Spot in a Given Column
-	    
         if(redTurn) {
             board[column][openPos] = 2;
         } else {
@@ -76,7 +74,7 @@ public class Model {
         changePlayerTurn();
         
         // Update Open Position
-        board[column][6] = ++openPos;
+        board[column][6] = ++board[column][6];
         
         return true;
 	}
