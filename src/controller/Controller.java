@@ -9,10 +9,11 @@ import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-
 
 public class Controller {
+	
+	// Column Subtract Value
+	private final int SUBTRACTION = 5;
 	
 	// View Class Node
 	private View view;
@@ -75,6 +76,8 @@ public class Controller {
 	private void attachEventHandlers() {
 		for(CircleNode circle : this.circleNodeList) {
 			circle.addEventHandler(MouseEvent.MOUSE_CLICKED, circleMouseClickEventHandler);
+			circle.addEventHandler(MouseEvent.MOUSE_ENTERED, circleMouseHoverEventHandler);
+			circle.addEventHandler(MouseEvent.MOUSE_EXITED, circleMouseHoverExitEventHandler);
 		}
 	}
 	
@@ -103,35 +106,77 @@ public class Controller {
 			// Retrieve Row # of Selected CircleNode
 			int row = circle.getRow();
 			
+			// Open Column CircleNode Position
+			int openPosition = model.getBoard()[column][6];
+			
 			// Print Row/Column Position of Circle
 			System.out.println("Selected Circle (" + row + "/" + column + ")");
 			
 			// Check if Space Exists at Given Column to Drop Chip
 			boolean columnSpace = getModel().checkColumnSpace(column);
 			
+			
 			// Check for Player's Turn
 			if(columnSpace && getModel().getRedTurn() == true) {
 				 
-				// Change to Yellow Player's Turn
-				model.changePlayerTurn();
+				// Place Red Chip 
+				model.dropCoin(column);
 				
 				// Set Circle Background to Red
-				circle.setBackground(Color.RED);
+				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
 				
 				System.out.println("Red Turn");
 				
 			} else if(columnSpace && model.getRedTurn() == false){
 				
-				// Change to Red Player's Turn
-				model.changePlayerTurn();
+				// Place Yellow Chip
+				model.dropCoin(column);
 				
 				// Set Circle Background to Yellow
-				circle.setBackground(Color.YELLOW);
+				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
 				
 				System.out.println("Yellow Turn");
 			}
 		}
 		
 		
+	};
+
+	// Mouse Hover Event Handler
+	
+	// Mouse Hover Event Handler
+	private EventHandler<MouseEvent> circleMouseHoverEventHandler = new EventHandler<MouseEvent>() {
+		
+		@Override
+		public void handle(MouseEvent event) {
+			
+			// Retrieve Reference Address of MouseEvent Source 
+			CircleNode circle = (CircleNode) event.getSource();
+			
+			// Retrieve Column Position of CircleNode
+			int column = circle.getColumn();
+			
+			// Configure  Stroke Property for all CircleNode Instances at the Specified Column
+			view.highlightColumn(column);
+
+		}
+	};
+	
+	// Mouse Hover Exit Event Handler
+	private EventHandler<MouseEvent> circleMouseHoverExitEventHandler = new EventHandler<MouseEvent>() {
+		
+		@Override
+		public void handle(MouseEvent event) {
+			
+			// Retrieve Reference Address of MouseEvent Source 
+			CircleNode circle = (CircleNode) event.getSource();
+			
+			// Retrieve Column Position of CircleNode
+			int column = circle.getColumn();
+			
+			// Remove Stroke Property for all CircleNode Instances at the Specified Column
+			view.removeHighlightColumn(column);
+			
+		}
 	};
 }
