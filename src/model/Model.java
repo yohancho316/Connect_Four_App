@@ -70,9 +70,6 @@ public class Model {
             board[column][openPos] = 3;
         }
         
-        // Change Player Turn
-        changePlayerTurn();
-        
         // Update Open Position
         board[column][6] = ++board[column][6];
         
@@ -95,4 +92,51 @@ public class Model {
 		return true;
 	}
 
+	// Check Vertical Win Condition
+	public boolean checkVerticalWinCondition(int column) {
+		
+		// Left & Right State
+		int left = 0;
+		int right = 0;
+		int matchCount = 0;
+		int currentColor = this.getRedTurn() == true ? 2 : 3;
+		
+		// Iterate through Vertical Column 
+		while(right < COLUMNS) {
+			
+			// Check Each Chip
+			if(board[column][right] == currentColor) {
+				
+				// Increment Match Count
+				++matchCount;
+				
+				// Check Win Condition
+				if(matchCount == 4) return true;
+				
+				// Increment Right
+				++right;
+				
+			} else {
+				
+				// Reset Match Count
+				matchCount = 0;
+				
+				// Increment Right
+				++right;
+				
+				// Reset Left Index Position
+				left = right;
+			}
+		}
+		
+		// No Vertical Win Condition Found
+		return false;
+	}
+	
+	// Check Horizontal Win Condition
+	
+	// Check Left Diagonal Win Condition
+	
+	// Check Right Diagonal Win Condition
+	
 }

@@ -122,6 +122,13 @@ public class Controller {
 				// Place Red Chip 
 				model.dropCoin(column);
 				
+				// Check Vertical Win Condition
+				boolean verticalWinCondition = model.checkVerticalWinCondition(column);
+				System.out.println("Vertical Win Condition: " + verticalWinCondition);
+				
+				// Change Player View
+				model.changePlayerTurn();
+				
 				// Set Circle Background to Red
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
 				
@@ -131,6 +138,13 @@ public class Controller {
 				
 				// Place Yellow Chip
 				model.dropCoin(column);
+				
+				// Check Vertical Win Condition
+				boolean verticalWinCondition = model.checkVerticalWinCondition(column);
+				System.out.println("Vertical Win Condition: " + verticalWinCondition);
+				
+				// Change Player View
+				model.changePlayerTurn();
 				
 				// Set Circle Background to Yellow
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
@@ -142,8 +156,6 @@ public class Controller {
 		
 	};
 
-	// Mouse Hover Event Handler
-	
 	// Mouse Hover Event Handler
 	private EventHandler<MouseEvent> circleMouseHoverEventHandler = new EventHandler<MouseEvent>() {
 		
