@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 
@@ -16,21 +15,18 @@ public class EndGameScene {
 	private final double VBOX_CHILD_SPACING = 5.0;
 	private final Insets VBOX_PADDING = new Insets(5.0);
 	
-	// Scene Node
-	private Scene scene;
-	
 	// VBox Layout Wrapper
 	private VBox vbox;
 	
 	// Replay Button Node
 	private Button replay;
 	
+	// Scene Node
+	private Scene scene;
+	
 	// Wining Player Label
 	private Label winLabel;
-	
-	// Winning Player String
-	private String winner;
-	
+
 	// Scene Getter Method
 	public Scene getScene() {
 		return this.scene;
@@ -49,11 +45,6 @@ public class EndGameScene {
 	// Label Getter Method
 	public Label getLabel() {
 		return this.winLabel;
-	}
-	
-	// Winner String Getter Method
-	public String getWinner() {
-		return this.winner;
 	}
 	
 	// Scene Setter Method
@@ -80,33 +71,21 @@ public class EndGameScene {
 		this.winLabel = winLabel;
 	}
 	
-	// Winner String Setter Method
-	public void setWinner(String winner) {
-		if(winner.isEmpty() || winner == null) throw new NullPointerException("Winner String cannot be null");
-		this.winner = winner;
-	}
-	
 	// EndGameScene Constructor
-	public EndGameScene(boolean isRed) {
+	public EndGameScene(String winColor) {
 		
 		// Execute Initializing Methods
-		this.initWinnerString(isRed);
-		this.initWinLabel();
+		this.initWinLabel(winColor);
 		this.initReplayButton();
 		this.initVBox();
 		this.initScene();
 	}
 	
-	// Initialize Winner String
-	private void initWinnerString(boolean isRed) {
-		if(isRed) this.winner = "RED";
-		else this.winner = "YELLOW";
-	}
-	
 	// Initialize Win Label
-	private void initWinLabel() {
+	private void initWinLabel(String winColor) {
 		this.winLabel = new Label();
-		this.winLabel.setText(this.winner + " PLAYER WINS!!");
+		System.out.println("Winning Argument Passed: " + winColor);
+		this.winLabel.setText(winColor.toString() + " PLAYER WINS!!");
 	}
 	
 	// Initialize Replay Button

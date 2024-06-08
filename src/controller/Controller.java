@@ -2,12 +2,14 @@ package controller;
 
 import model.Model;
 import view.CircleNode;
+import view.EndGameScene;
 import view.ViewStackPane;
 import view.View;
 
 import java.util.List;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -131,7 +133,6 @@ public class Controller {
 			// Check if Space Exists at Given Column to Drop Chip
 			boolean columnSpace = getModel().checkColumnSpace(column);
 			
-			
 			// Check for Player's Turn
 			if(columnSpace && getModel().getRedTurn() == true) {
 				 
@@ -139,14 +140,23 @@ public class Controller {
 				model.dropCoin(column);
 				
 				// Check Vertical Win Condition
-				boolean verticalWinCondition = model.checkVerticalWinCondition(column);
-				System.out.println("Vertical Win Condition: " + verticalWinCondition);
-				
-				// Change Player View
-				model.changePlayerTurn();
+				if(model.checkVerticalWinCondition(column)) {
+					
+					// Instantiate EndGameScene Instance & Pass Winning Color
+					EndGameScene endScene = new EndGameScene("RED");
+					
+					// Update Primary Stage Scene to End Game Scene
+					getPrimaryStage().setScene(endScene.getScene());
+					
+					// Quit Game
+					return;
+				}
 				
 				// Set Circle Background to Red
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
+				
+				// Change Player View
+				model.changePlayerTurn();
 				
 				System.out.println("Red Turn");
 				
@@ -156,14 +166,23 @@ public class Controller {
 				model.dropCoin(column);
 				
 				// Check Vertical Win Condition
-				boolean verticalWinCondition = model.checkVerticalWinCondition(column);
-				System.out.println("Vertical Win Condition: " + verticalWinCondition);
-				
-				// Change Player View
-				model.changePlayerTurn();
+				if(model.checkVerticalWinCondition(column)) {
+					
+					// Instantiate EndGameScene Instance & Pass Winning Color
+					EndGameScene endScene = new EndGameScene("YELLOW");
+					
+					// Update Primary Stage Scene to End Game Scene
+					getPrimaryStage().setScene(endScene.getScene());
+					
+					// Quit Game
+					return;
+				}
 				
 				// Set Circle Background to Yellow
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
+				
+				// Change Player View
+				model.changePlayerTurn();
 				
 				System.out.println("Yellow Turn");
 			}
