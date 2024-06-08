@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class Controller {
 	
@@ -20,6 +21,9 @@ public class Controller {
 	
 	// Model Class Node
 	private Model model;
+	
+	// Primary Stage Node
+	private Stage primaryStage;
 	
 	// StackPane Collection
 	private List<ViewStackPane> stackPaneList;
@@ -35,6 +39,11 @@ public class Controller {
 	// Model Getter Method
 	public Model getModel() {
 		return this.model;
+	}
+	
+	// Primary Stage Getter Method
+	public Stage getPrimaryStage() {
+		return this.primaryStage;
 	}
 	
 	// StackPane Collection Getter Method
@@ -56,6 +65,12 @@ public class Controller {
 	public void setModel(Model model) {
 		if(model == null) throw new NullPointerException("Model cannot be null");
 		this.model = model;
+	}
+	
+	// Primary Stage Setter Method
+	public void setPrimaryStage(Stage primaryStage) {
+		if(primaryStage == null) throw new NullPointerException("Primary Stage cannot be null");
+		this.primaryStage = primaryStage;
 	}
 	
 	// StackPane Collection Setter Method
@@ -82,10 +97,11 @@ public class Controller {
 	}
 	
 	// Controller Constructor Method
-	public Controller(Model model, View view) {
-		if(model == null || view == null) throw new NullPointerException("Model/View cannot be null");
+	public Controller(Model model, View view, Stage primaryStage) {
+		if(model == null || view == null || primaryStage == null) throw new NullPointerException("Model/View/Stage cannot be null");
 		this.model = model;
 		this.view = view;
+		this.primaryStage = primaryStage;
 		this.stackPaneList = view.getStackPaneList();
 		this.circleNodeList = view.getCircleNodeList();
 		this.attachEventHandlers();
