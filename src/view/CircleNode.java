@@ -3,7 +3,7 @@ package view;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class CircleNode extends Circle{
+public class CircleNode extends Circle {
 	
 	// Static & Final Fields
 	private static final float CENTER_X = 90.0f;

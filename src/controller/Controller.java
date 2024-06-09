@@ -2,13 +2,16 @@ package controller;
 
 import model.Model;
 import view.CircleNode;
+import view.EndGameScene;
 import view.ViewStackPane;
 import view.View;
 
 import java.util.List;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class Controller {
 	
@@ -20,6 +23,9 @@ public class Controller {
 	
 	// Model Class Node
 	private Model model;
+	
+	// Primary Stage Node
+	private Stage primaryStage;
 	
 	// StackPane Collection
 	private List<ViewStackPane> stackPaneList;
@@ -35,6 +41,11 @@ public class Controller {
 	// Model Getter Method
 	public Model getModel() {
 		return this.model;
+	}
+	
+	// Primary Stage Getter Method
+	public Stage getPrimaryStage() {
+		return this.primaryStage;
 	}
 	
 	// StackPane Collection Getter Method
@@ -56,6 +67,12 @@ public class Controller {
 	public void setModel(Model model) {
 		if(model == null) throw new NullPointerException("Model cannot be null");
 		this.model = model;
+	}
+	
+	// Primary Stage Setter Method
+	public void setPrimaryStage(Stage primaryStage) {
+		if(primaryStage == null) throw new NullPointerException("Primary Stage cannot be null");
+		this.primaryStage = primaryStage;
 	}
 	
 	// StackPane Collection Setter Method
@@ -82,13 +99,37 @@ public class Controller {
 	}
 	
 	// Controller Constructor Method
-	public Controller(Model model, View view) {
-		if(model == null || view == null) throw new NullPointerException("Model/View cannot be null");
+	public Controller(Model model, View view, Stage primaryStage) {
+		if(model == null || view == null || primaryStage == null) throw new NullPointerException("Model/View/Stage cannot be null");
 		this.model = model;
 		this.view = view;
+		this.primaryStage = primaryStage;
 		this.stackPaneList = view.getStackPaneList();
 		this.circleNodeList = view.getCircleNodeList();
 		this.attachEventHandlers();
+	}
+	
+	// Check Vertical Win Condition Method
+	private boolean checkVerticalWinCondition(int column) {
+		return model.checkVerticalWinCondition(column);
+	}
+	
+	// Check Horizontal Win Condition Method
+	private boolean checkHorizontalWinCondition(int row) {
+		return model.checkHorizontalWinCondition(row);
+	}
+	
+	// Terminate Game Process Method
+	private void terminateGame() {
+		
+		// Initialize Winning Color String
+		String winner = model.getRedTurn() == true ? "RED" : "YELLOW";
+		
+		// Instantiate EndGameScene Instance & Pass Winning Color
+		EndGameScene endScene = new EndGameScene(winner);
+		
+		// Update Primary Stage Scene to End Game Scene
+		getPrimaryStage().setScene(endScene.getScene());
 	}
 	
 	// Mouse Click Event Handler
@@ -110,40 +151,74 @@ public class Controller {
 			int openPosition = model.getBoard()[column][6];
 			
 			// Print Row/Column Position of Circle
-			System.out.println("Selected Circle (" + row + "/" + column + ")");
+			System.out.println("Selected Circle (" + column + "/" + row + ")");
 			
 			// Check if Space Exists at Given Column to Drop Chip
 			boolean columnSpace = getModel().checkColumnSpace(column);
 			
-			
-			// Check for Player's Turn
+			// If Space Exists Place Chip in View & Model Matrix 
 			if(columnSpace && getModel().getRedTurn() == true) {
-				 
-				// Place Red Chip 
+				
+				// Get Open Row Position
+				
+				// Place Coin in Model Matrix (RED)
 				model.dropCoin(column);
 				
-				// Set Circle Background to Red
+				// Place Coin in View Matrix Visually (RED)
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
 				
-				System.out.println("Red Turn");
+				// Check for Vertical Win Condition
+				if(checkVerticalWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
 				
-			} else if(columnSpace && model.getRedTurn() == false){
+				// Check for Horizontal Win Condition
+				else if(checkHorizontalWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
+
+			} else if(columnSpace && model.getRedTurn() == false ) {
 				
-				// Place Yellow Chip
+				// Place Coin in Model Matrix (YELLOW)
 				model.dropCoin(column);
 				
-				// Set Circle Background to Yellow
+				// Place Coin in View Matrix Visually (YELLOW)
 				view.changeChipColor(model.getRedTurn(), SUBTRACTION - openPosition, column);
 				
-				System.out.println("Yellow Turn");
+				// Check for Vertical Win Condition
+				if(checkVerticalWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
+				
+				// Check for Horizontal Win Condition
+				else if(checkHorizontalWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
+
 			}
+			
+			// Change Player View
+			model.changePlayerTurn();
 		}
-		
-		
+
 	};
 
-	// Mouse Hover Event Handler
-	
 	// Mouse Hover Event Handler
 	private EventHandler<MouseEvent> circleMouseHoverEventHandler = new EventHandler<MouseEvent>() {
 		

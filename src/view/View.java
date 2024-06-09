@@ -17,7 +17,7 @@ public class View {
 	// Static & Final Fields
 	private final int COLUMN = 7;
 	private final int ROW = 6;
-	private final double STROKE_WIDTH = 5.0;
+	private final double STROKE_WIDTH = 2.5;
 	private final double GRID_PANE_PADDING = 50.0;
 	private final double GRID_PANE_VGAP = 0.5;
 	private final double GRID_PANE_HGAP = 0.5;
