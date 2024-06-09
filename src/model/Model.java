@@ -104,10 +104,10 @@ public class Model {
 		// Iterate through Vertical Column 
 		while(right < COLUMNS) {
 			
-			// Check Each Chip
+			// Check for Matching Chips
 			if(board[column][right] == currentColor) {
 				
-				// Increment Match Count
+				// Increment Consecutive Match Count
 				++matchCount;
 				
 				// Check Win Condition
@@ -124,7 +124,7 @@ public class Model {
 				// Increment Right
 				++right;
 				
-				// Reset Left Index Position
+				// Reset Left Count Position
 				left = right;
 			}
 		}
@@ -133,7 +133,44 @@ public class Model {
 		return false;
 	}
 	
+	
 	// Check Horizontal Win Condition
+	public boolean checkHorizontalWinCondition(int row) {
+		
+		// Search State Variables 
+		int left = 0;
+		int right = 0;
+		int matchCount = 0;
+		int currentColor = this.getRedTurn() == true ? 2 : 3;
+		
+		// Iterate through Vertical Column 
+		while(right < COLUMNS) {
+			
+			// Check for Matching Chips
+			if(board[right][row] == currentColor) {
+				
+				// Increment Consecutive Match Count
+				++matchCount;
+				
+				// Check Win Condition
+				if(matchCount == 4) return true;
+				
+				++right;
+				
+			} else {
+				
+				// Increment Right
+				++right;
+				
+				// Reset Left Count Position
+				left = right;
+			}
+			
+		}
+		
+		// No Horizontal Win Condition Found
+		return false;
+	}
 	
 	// Check Left Diagonal Win Condition
 	
