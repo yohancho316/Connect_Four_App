@@ -135,41 +135,26 @@ public class Model {
 	
 	
 	// Check Horizontal Win Condition
-	public boolean checkHorizontalWinCondition(int row) {
+	// THe problem is where the user clicks is the row that gets selected
+	// as opposed to the row that 
+	public boolean checkHorizontalWinCondition(int column) {
 		
-		// Search State Variables 
-		int left = 0;
-		int right = 0;
-		int matchCount = 0;
-		int currentColor = this.getRedTurn() == true ? 2 : 3;
-		
-		// Iterate through Vertical Column 
-		while(right < COLUMNS) {
-			
-			// Check for Matching Chips
-			if(board[right][row] == currentColor) {
-				
-				// Increment Consecutive Match Count
-				++matchCount;
-				
-				// Check Win Condition
-				if(matchCount == 4) return true;
-				
-				++right;
-				
-			} else {
-				
-				// Increment Right
-				++right;
-				
-				// Reset Left Count Position
-				left = right;
-			}
-			
-		}
-		
-		// No Horizontal Win Condition Found
-		return false;
+        System.out.println("Hitting Horizontal Win Check Condition");
+        
+        int row = board[column][6] - 1;
+        int currentColor = this.getRedTurn() ? 2 : 3;
+        int matchCount = 0;
+
+        for (int col = 0; col < COLUMNS; col++) {
+            if (board[col][row] == currentColor) {
+                matchCount++;
+                if (matchCount == 4) return true;
+            } else {
+                matchCount = 0;
+            }
+        }
+
+        return false;
 	}
 	
 	// Check Left Diagonal Win Condition
