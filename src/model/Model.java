@@ -95,6 +95,9 @@ public class Model {
 	// Check Vertical Win Condition
 	public boolean checkVerticalWinCondition(int column) {
 		
+        System.out.println("Hitting Vertical Win Check Condition");
+
+		
 		// Left & Right State
 		int left = 0;
 		int right = 0;
@@ -133,10 +136,7 @@ public class Model {
 		return false;
 	}
 	
-	
 	// Check Horizontal Win Condition
-	// THe problem is where the user clicks is the row that gets selected
-	// as opposed to the row that 
 	public boolean checkHorizontalWinCondition(int column) {
 		
         System.out.println("Hitting Horizontal Win Check Condition");
@@ -155,10 +155,49 @@ public class Model {
         }
 
         return false;
-	}
-	
-	// Check Left Diagonal Win Condition
+	}	
 	
 	// Check Right Diagonal Win Condition
+	public boolean checkDiagonalRightWinCondition(int column) {
+		
+		// Tracking State Variables
+		int matchCount = 0;
+		int currentColor = this.getRedTurn() ? 2 : 3;
+		
+		// Identify Column & Row
+		int col = column;
+		int row = this.board[col][6] - 1;
+		
+		// Find Smallest Value
+		int min = Math.min(col, row);
+		
+		// Assign Left Starting Positions
+		int leftX = col - min;
+		int leftY = row - min;
+		
+		// Determine the farthest possible right end of the diagonal:
+		int maxLeftX = 6;
+		int maxLeftY = 5;
+		
+		// Determine Total Iterations to Reach Right Most Col & Row Index Positions
+		int steps = Math.min(maxLeftX - leftX, maxLeftY - leftY);
+		
+		for(int i = 0; i <= steps; i++, leftX++, leftY++) {
+			
+			System.out.println("Checking (" + leftX + "," + leftY+ ")");
+			
+			if(this.board[leftX][leftY] == currentColor) {
+				++matchCount;
+				if(matchCount == 4) return true;
+			} else {
+				matchCount = 0;
+			}
+			
+			System.out.println();
+		}
+		
+		// No Match Found
+		return false;
+	}
 	
 }
