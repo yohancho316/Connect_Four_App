@@ -119,6 +119,11 @@ public class Controller {
 		return model.checkHorizontalWinCondition(row);
 	}
 	
+	// Check Diagonal Right Win Condition Method
+	private boolean checkDiagonalRightWinCondition(int column) {
+		return model.checkDiagonalRightWinCondition(column);
+	}
+	
 	// Terminate Game Process Method
 	private void terminateGame() {
 		
@@ -184,6 +189,15 @@ public class Controller {
 					
 					return;
 				}
+				
+				// Check for Diagonal Right Win Condition
+				else if(checkDiagonalRightWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
 
 			} else if(columnSpace && model.getRedTurn() == false ) {
 				
@@ -210,7 +224,15 @@ public class Controller {
 					
 					return;
 				}
-
+				
+				// Check for Diagonal Right Win Condition
+				else if(checkDiagonalRightWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
 			}
 			
 			// Change Player View
