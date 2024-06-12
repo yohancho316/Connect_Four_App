@@ -27,6 +27,9 @@ public class Controller {
 	// Primary Stage Node
 	private Stage primaryStage;
 	
+	// Game Scene Node
+	private Scene gameScene;
+	
 	// StackPane Collection
 	private List<ViewStackPane> stackPaneList;
 	
@@ -46,6 +49,11 @@ public class Controller {
 	// Primary Stage Getter Method
 	public Stage getPrimaryStage() {
 		return this.primaryStage;
+	}
+	
+	// Game Scene Getter Method
+	public Scene getGameScene() {
+		return this.gameScene;
 	}
 	
 	// StackPane Collection Getter Method
@@ -75,6 +83,11 @@ public class Controller {
 		this.primaryStage = primaryStage;
 	}
 	
+	// Game Scene Setter Method
+	public void setGameScene(Scene gameScene) {
+		if(gameScene == null) throw new NullPointerException("Scene cannot be null");
+	}
+	
 	// StackPane Collection Setter Method
 	public void setStackPaneList(List<ViewStackPane> stackPaneList) {
 		if(stackPaneList == null) throw new NullPointerException("StackPane collection cannot be null");
@@ -99,11 +112,12 @@ public class Controller {
 	}
 	
 	// Controller Constructor Method
-	public Controller(Model model, View view, Stage primaryStage) {
+	public Controller(Model model, View view, Stage primaryStage, Scene scene) {
 		if(model == null || view == null || primaryStage == null) throw new NullPointerException("Model/View/Stage cannot be null");
 		this.model = model;
 		this.view = view;
 		this.primaryStage = primaryStage;
+		this.gameScene = scene;
 		this.stackPaneList = view.getStackPaneList();
 		this.circleNodeList = view.getCircleNodeList();
 		this.attachEventHandlers();
@@ -135,6 +149,9 @@ public class Controller {
 		// Initialize Winning Color String
 		String winner = model.getRedTurn() == true ? "RED" : "YELLOW";
 		
+		// Store Reference to Game Scene
+		this.gameScene = this.primaryStage.getScene();
+	
 		// Instantiate EndGameScene Instance & Pass Winning Color
 		EndGameScene endScene = new EndGameScene(winner);
 		
@@ -313,8 +330,11 @@ public class Controller {
 			model.resetGame();
 			
 			// Invoke Reset Game Method via View
+			view.resetGame();
 			
-		
+			// Update Primary Stage Scene to Game Scene
+			getPrimaryStage().setScene(gameScene);
+			
 		}
 	};
 	
