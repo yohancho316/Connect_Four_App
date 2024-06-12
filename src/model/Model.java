@@ -9,7 +9,7 @@ public class Model {
 	private boolean redTurn; 
 	
 	// Matrix Collection
-	private final int[][] board;
+	private int[][] board;
 	
 	// Constructor Method
 	public Model() {
@@ -44,6 +44,12 @@ public class Model {
 		this.redTurn = redTurn;
 	}
 	
+	// Board Matrix Setter Method
+	public void setBoard(int[][] board) {
+		if(board == null) throw new NullPointerException("Board cannot be null");
+		this.board = board;
+	}
+	
 	// Change Player Turn Method
 	public void changePlayerTurn() {
 		this.redTurn = !this.redTurn;
@@ -76,7 +82,7 @@ public class Model {
         return true;
 	}
 	
-	// Print Board
+	// Print Board Method
 	public void printBoard() {
 		for(int i = 0; i < COLUMNS; i++) {
 			for(int j = 0; j < ROWS; j++) {
@@ -92,7 +98,7 @@ public class Model {
 		return true;
 	}
 
-	// Check Vertical Win Condition
+	// Check Vertical Win Condition Method
 	public boolean checkVerticalWinCondition(int column) {
 		
         System.out.println("Hitting Vertical Win Check Condition");
@@ -136,7 +142,7 @@ public class Model {
 		return false;
 	}
 	
-	// Check Horizontal Win Condition
+	// Check Horizontal Win Condition Method
 	public boolean checkHorizontalWinCondition(int column) {
 		
         System.out.println("Hitting Horizontal Win Check Condition");
@@ -157,7 +163,7 @@ public class Model {
         return false;
 	}
 	
-	// Check Left Diagonal Win Condition
+	// Check Left Diagonal Win Condition Method
 	public boolean checkDiagonalLeftWinCondition(int column) {
 		
 		// Tracking State Variables
@@ -201,7 +207,7 @@ public class Model {
 		return false;
 	}
 	
-	// Check Right Diagonal Win Condition
+	// Check Right Diagonal Win Condition Method
 	public boolean checkDiagonalRightWinCondition(int column) {
 		
 		// Tracking State Variables
@@ -242,6 +248,17 @@ public class Model {
 		
 		// No Match Found
 		return false;
+	}
+	
+	// Reset Game Method
+	public void resetGame() {
+		
+		// Instantiate New Matrix Board
+		this.setBoard(new int[COLUMNS][ROWS]);
+		
+		// Reset Player Turn
+		if(this.redTurn == false) this.changePlayerTurn();
+		
 	}
 	
 }
