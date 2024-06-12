@@ -138,6 +138,9 @@ public class Controller {
 		// Instantiate EndGameScene Instance & Pass Winning Color
 		EndGameScene endScene = new EndGameScene(winner);
 		
+		// Attach Reset Game Event Handler
+		endScene.getReplayButton().addEventHandler(MouseEvent.MOUSE_CLICKED, resetGameEventHandler);
+		
 		// Update Primary Stage Scene to End Game Scene
 		getPrimaryStage().setScene(endScene.getScene());
 	}
@@ -299,4 +302,20 @@ public class Controller {
 			
 		}
 	};
+
+	// Reset Game Event handler
+	private EventHandler<MouseEvent> resetGameEventHandler = new EventHandler<MouseEvent>() {
+		
+		@Override
+		public void handle(MouseEvent event) {
+			
+			// Invoke Reset Game Method via Model
+			model.resetGame();
+			
+			// Invoke Reset Game Method via View
+			
+		
+		}
+	};
+	
 }
