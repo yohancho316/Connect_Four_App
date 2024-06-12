@@ -155,7 +155,51 @@ public class Model {
         }
 
         return false;
-	}	
+	}
+	
+	// Check Left Diagonal Win Condition
+	public boolean checkDiagonalLeftWinCondition(int column) {
+		
+		// Tracking State Variables
+		int matchCount = 0;
+		int currentColor = this.getRedTurn() ? 2 : 3;
+		
+		// Identify Column & Row
+		int col = column;
+		int row = this.board[col][6] - 1;
+		
+		// Find Minimum Distance to Possible Top Left of the Board
+		int minLeft = Math.min(col,  5 - row);
+		int minRight = Math.min(row,  6 - col);
+		
+		// Assign Left Starting Positions
+		int leftX = col - minLeft;
+		int leftY = row + minLeft;
+		
+		// Assign Right Ending Position
+		int rightX = col + minRight;
+		int rightY = row - minRight;
+		
+		// Find Total Steps
+		int steps = minLeft + minRight;
+		
+		for(int i = 0; i <= steps; i++, leftX++, leftY--) {
+			
+			System.out.println("Checking (" + leftX + "," + leftY+ ")");
+			
+			if(board[leftX][leftY] == currentColor) {
+				++matchCount;
+				if(matchCount == 4) return true;
+			} else {
+				matchCount = 0;
+			}
+			
+			System.out.println();
+		}
+		
+		// No Match Found
+		return false;
+	}
 	
 	// Check Right Diagonal Win Condition
 	public boolean checkDiagonalRightWinCondition(int column) {

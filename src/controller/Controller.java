@@ -119,6 +119,11 @@ public class Controller {
 		return model.checkHorizontalWinCondition(row);
 	}
 	
+	// Check Diagonal Left Win Condition Method
+	private boolean checkDiagonalLeftWinCondition(int column) {
+		return model.checkDiagonalLeftWinCondition(column);
+	}
+	
 	// Check Diagonal Right Win Condition Method
 	private boolean checkDiagonalRightWinCondition(int column) {
 		return model.checkDiagonalRightWinCondition(column);
@@ -190,6 +195,15 @@ public class Controller {
 					return;
 				}
 				
+				// Check for Diagonal Left Win Condition
+				else if(checkDiagonalLeftWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
+				
 				// Check for Diagonal Right Win Condition
 				else if(checkDiagonalRightWinCondition(column)) {
 					
@@ -218,6 +232,15 @@ public class Controller {
 				
 				// Check for Horizontal Win Condition
 				else if(checkHorizontalWinCondition(column)) {
+					
+					// Invoke Terminate Game Method
+					terminateGame();
+					
+					return;
+				}
+				
+				// Check for Diagonal Left Win Condition
+				else if(checkDiagonalLeftWinCondition(column)) {
 					
 					// Invoke Terminate Game Method
 					terminateGame();
