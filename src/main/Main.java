@@ -26,7 +26,7 @@ public class Main extends Application {
 			View view = new View();
 			
 			// Instantiate Controller Node
-			Controller controller = new Controller(model, view, primaryStage);
+			Controller controller = new Controller(model, view, primaryStage, null);
 			
 			// Instantiate Scene Container
 	        Scene scene = new Scene(view.getBorderPane(), SCENE_WIDTH, SCENE_HEIGHT);

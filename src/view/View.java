@@ -243,4 +243,17 @@ public class View {
 			
 		}
 	}
+	
+	// Reset Visual Game Board Method
+	public void resetGame() {
+		
+		// Iterate All CircleNode Instances in Collection 
+		for(CircleNode circle : this.circleNodeList) {
+			
+			// Configure Background for each StackPane Wrapper
+			circle.setBackground(Color.DARKBLUE);
+			
+		}
+		
+	}
 }
