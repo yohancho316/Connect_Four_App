@@ -2,7 +2,10 @@
 
 This project implements a Connect Four game using Java and JavaFX. Connect Four is a classic two-player game where the players take turns dropping colored discs from the top into a vertically suspended grid. The objective is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.
 
-![Connect Four Demo](https://raw.githubusercontent.com/yohancho316/Connect_Four_App/main/src/demo/connector_four_demo.gif)
+```
+Click on the Image to Watch My Project in Action on YouTube
+```
+[![Watch my Project in Action on YouTube](https://raw.githubusercontent.com/yohancho316/Connect_Four_App/main/src/demo/connector_four_demo.gif)]([https://www.youtube.com/watch?v=jEK_BHXmWkg](https://youtu.be/O-70gu_kez8))
 
 ## Design Pattern Architecture
 
